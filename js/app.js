@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+document.createElement(deck)
 
 /*
  * Display the cards on the page
@@ -28,6 +28,10 @@ function shuffle(array) {
 
 /*
  * set up the event listener for a card. If a card is clicked:
+ */
+ const cards = document.querySelectorAll('.card');
+ console.log(cards);
+ /*
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
