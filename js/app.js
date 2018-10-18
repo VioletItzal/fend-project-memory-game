@@ -1,8 +1,6 @@
 /*
  * Create a list that holds all of your cards
  */
-document.createElement(deck)
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
