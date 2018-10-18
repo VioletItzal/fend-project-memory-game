@@ -27,12 +27,16 @@ function shuffle(array) {
 /*
  * set up the event listener for a card. If a card is clicked:
  */
- const cards = document.querySelectorAll('.card');
- for (card of cards) {
-   card.addEventListener('click', () => {
-     console.log("I am a card!");
-   });
- }
+const deck = document.querySelector('.deck');
+
+deck.addEventListener('click', () => {
+  const target = event.target;
+  if (target.classList.contains('card')) {
+    target.classList.toggle('open');
+    target.classList.toggle('show')
+    console.log("I'm a card!")
+  }
+});
  /*
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
