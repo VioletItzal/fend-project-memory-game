@@ -27,16 +27,40 @@ function shuffle(array) {
 /*
  * set up the event listener for a card. If a card is clicked:
  */
+let toggledCards = [];
+
 const deck = document.querySelector('.deck');
 
 deck.addEventListener('click', () => {
-  const target = event.target;
-  if (target.classList.contains('card')) {
-    target.classList.toggle('open');
-    target.classList.toggle('show')
-    console.log("I'm a card!")
+  const clickTarget = event.target;
+  if (clickTarget.classList.contains('card') && toggledCards.length < 2) {
+    toggleCard(clickTarget);
+    addToggleCard(clickTarget);
+    if (toggledCards.length === 2) {
+      checkMatch();
+      console.log("2 cards!");
+    }
   }
 });
+
+function toggleCard(clickTarget) {
+  clickTarget.classList.toggle('open');
+  clickTarget.classList.toggle('show');
+}
+
+function addToggleCard(clickTarget) {
+  toggledCards.push(clickTarget);
+  console.log(toggledCards);
+}
+
+function checkMatch() {
+  if(toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className
+  ) {
+    console.log('Match!');
+  } else {
+      console.log('Not a Match!');
+    }
+  }
  /*
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
