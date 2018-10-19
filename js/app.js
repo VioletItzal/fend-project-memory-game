@@ -33,19 +33,24 @@ const deck = document.querySelector('.deck');
 
 deck.addEventListener('click', () => {
   const clickTarget = event.target;
-  if (clickTarget.classList.contains('card') && toggledCards.length < 2) {
-    toggleCard(clickTarget);
-    addToggleCard(clickTarget);
-    if (toggledCards.length === 2) {
-      checkMatch();
-      console.log("2 cards!");
+  if (
+    clickTarget.classList.contains('card') &&
+    !clickTarget.classList.contains('match') &&
+    toggledCards.length < 2 &&
+    !toggledCards.includes(clickTarget)
+  ) {
+      toggleCard(clickTarget);
+      addToggleCard(clickTarget);
+      if (toggledCards.length === 2) {
+        checkMatch();
+        console.log("2 cards!");
     }
   }
 });
 
-function toggleCard(clickTarget) {
-  clickTarget.classList.toggle('open');
-  clickTarget.classList.toggle('show');
+function toggleCard(card) {
+  card.classList.toggle('open');
+  card.classList.toggle('show');
 }
 
 function addToggleCard(clickTarget) {
@@ -56,11 +61,19 @@ function addToggleCard(clickTarget) {
 function checkMatch() {
   if(toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className
   ) {
+    toggledCards[0].classList.toggle('match');
+    toggledCards[1].classList.toggle('match');
+    toggledCards = [];
     console.log('Match!');
   } else {
+    setTimeout(() => {
+      toggleCard(toggledCards[0]);
+      toggleCard(toggledCards[1]);
+      toggledCards = [];
       console.log('Not a Match!');
-    }
+    }, 1000);
   }
+}
  /*
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
